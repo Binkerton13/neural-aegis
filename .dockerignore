@@ -1,0 +1,23 @@
+# Git
+.git/
+.gitignore
+
+# Documentation
+docs/
+*.md
+
+# IDE
+.vscode/
+.idea/
+
+# Godot editor files
+.import/
+.godot/
+*.translation
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+/tmp/

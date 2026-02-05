@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  neural-aegis:
+    build: .
+    container_name: neural-aegis
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./data:/app/data
+    network_mode: host
+    stdin_open: true
+    tty: true
