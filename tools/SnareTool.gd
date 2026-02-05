@@ -2,6 +2,9 @@ extends Tool
 ## Snare Tool
 ## Sets automated traps for specific threat actor types
 
+var dialog_scene = preload("res://scenes/SnareDialog.tscn")
+var config_dialog: AcceptDialog = null
+
 func _ready():
 	super._ready()
 	tool_name = "Snare"
@@ -11,21 +14,47 @@ func _ready():
 	resource_cost = 12
 
 func use_tool(target_data: Dictionary) -> Dictionary:
+	# Show configuration dialog instead of immediate execution
+	show_config_dialog(target_data)
+	return {"success": false, "message": "Configuration dialog opened"}
+
+func show_config_dialog(target_data: Dictionary):
+	if not config_dialog:
+		config_dialog = dialog_scene.instantiate()
+		get_tree().root.add_child(config_dialog)
+		config_dialog.configuration_confirmed.connect(_on_config_confirmed.bind(target_data))
+	
+	config_dialog.show_dialog()
+
+func _on_config_confirmed(config: Dictionary, target_data: Dictionary):
 	var base_result = super.use_tool(target_data)
 	if not base_result.success:
-		return base_result
+		return
 	
-	# Simulate snare deployment
+	# Use the configuration from the dialog
 	var snare_name = ThemeManager.get_term("defensive_action")
+	var target = config.get("target", "Unknown")
+	var location = config.get("location", "Unknown")
+	var trigger = config.get("trigger", "Immediate")
 	var threat_name = ThemeManager.get_term("threat_actor")
 	
-	var message = "Deployed " + snare_name + " targeting " + threat_name + "s"
+	var message = "Deployed " + snare_name + " at " + location
+	message += " targeting " + target + " (trigger: " + trigger + ")"
 	
-	# Simulate trap triggering
-	var triggered = randf() > 0.3  # 70% chance to trigger
+	# Calculate effectiveness based on configuration
+	var trigger_chance = 0.7  # Base 70% chance
+	if trigger == "Immediate":
+		trigger_chance = 0.9
+	elif trigger == "On Access Attempt":
+		trigger_chance = 0.8
+	
+	var triggered = randf() < trigger_chance
 	
 	if triggered:
 		var caught_threats = randi() % 2 + 1
+		if target == "All Threats":
+			caught_threats += 1
+		
 		message += ". Caught " + str(caught_threats) + " " + threat_name
 		if caught_threats > 1:
 			message += "s"
@@ -38,14 +67,14 @@ func use_tool(target_data: Dictionary) -> Dictionary:
 			GameState.neutralize_threat({
 				"entity_id": randi() % 20 + 1,
 				"method": "snare",
-				"trap_type": snare_name
+				"trap_type": snare_name,
+				"location": location
 			})
 	else:
 		message += ". No threats caught yet (monitoring...)"
 		GameState.add_score(2)
 	
-	return {
-		"success": true,
-		"message": message,
-		"triggered": triggered
-	}
+	# Update status with result
+	var dashboard = get_tree().root.get_node_or_null("Main/MainDashboard")
+	if dashboard:
+		dashboard.update_status(message)

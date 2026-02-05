@@ -4,10 +4,10 @@ extends Control
 
 @onready var log_viewer = $MainLayout/ContentArea/LogViewer
 @onready var tool_palette = $MainLayout/ContentArea/ToolPalette
-@onready var score_label = $MainLayout/TopBar/StatsPanel/ScoreLabel
-@onready var threats_label = $MainLayout/TopBar/StatsPanel/ThreatsLabel
-@onready var resources_label = $MainLayout/TopBar/StatsPanel/ResourcesLabel
-@onready var theme_selector = $MainLayout/TopBar/ThemePanel/ThemeSelector
+@onready var score_label = $MainLayout/TopBar/TopBarLayout/StatsPanel/ScoreLabel
+@onready var threats_label = $MainLayout/TopBar/TopBarLayout/StatsPanel/ThreatsLabel
+@onready var resources_label = $MainLayout/TopBar/TopBarLayout/StatsPanel/ResourcesLabel
+@onready var theme_selector = $MainLayout/TopBar/TopBarLayout/ThemePanel/ThemeSelector
 @onready var status_label = $MainLayout/BottomBar/StatusLabel
 
 var log_generator: Node

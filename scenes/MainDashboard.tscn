@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/MainDashboard.gd" id="1"]
-[ext_resource type="PackedScene" path="res://scenes/LogViewer.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/TableLogViewer.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/ToolPalette.tscn" id="3"]
 
 [node name="MainDashboard" type="Control"]
@@ -34,40 +34,38 @@ size_flags_horizontal = 3
 text = "Neural Aegis"
 vertical_alignment = 1
 
-[node name="ThemePanel" type="HBoxContainer" parent="MainLayout/TopBar"]
+[node name="ThemePanel" type="HBoxContainer" parent="MainLayout/TopBar/TopBarLayout"]
 layout_mode = 2
-size_flags_horizontal = 8
 
-[node name="ThemeLabel" type="Label" parent="MainLayout/TopBar/ThemePanel"]
+[node name="ThemeLabel" type="Label" parent="MainLayout/TopBar/TopBarLayout/ThemePanel"]
 layout_mode = 2
 text = "Theme:"
 vertical_alignment = 1
 
-[node name="ThemeSelector" type="OptionButton" parent="MainLayout/TopBar/ThemePanel"]
+[node name="ThemeSelector" type="OptionButton" parent="MainLayout/TopBar/TopBarLayout/ThemePanel"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="StatsPanel" type="HBoxContainer" parent="MainLayout/TopBar"]
+[node name="StatsPanel" type="HBoxContainer" parent="MainLayout/TopBar/TopBarLayout"]
 layout_mode = 2
-size_flags_horizontal = 8
 
-[node name="ScoreLabel" type="Label" parent="MainLayout/TopBar/StatsPanel"]
+[node name="ScoreLabel" type="Label" parent="MainLayout/TopBar/TopBarLayout/StatsPanel"]
 layout_mode = 2
 text = "Score: 0"
 vertical_alignment = 1
 
-[node name="VSeparator1" type="VSeparator" parent="MainLayout/TopBar/StatsPanel"]
+[node name="VSeparator1" type="VSeparator" parent="MainLayout/TopBar/TopBarLayout/StatsPanel"]
 layout_mode = 2
 
-[node name="ThreatsLabel" type="Label" parent="MainLayout/TopBar/StatsPanel"]
+[node name="ThreatsLabel" type="Label" parent="MainLayout/TopBar/TopBarLayout/StatsPanel"]
 layout_mode = 2
 text = "Threats Detected: 0"
 vertical_alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="MainLayout/TopBar/StatsPanel"]
+[node name="VSeparator2" type="VSeparator" parent="MainLayout/TopBar/TopBarLayout/StatsPanel"]
 layout_mode = 2
 
-[node name="ResourcesLabel" type="Label" parent="MainLayout/TopBar/StatsPanel"]
+[node name="ResourcesLabel" type="Label" parent="MainLayout/TopBar/TopBarLayout/StatsPanel"]
 layout_mode = 2
 text = "Resources: 100%"
 vertical_alignment = 1
