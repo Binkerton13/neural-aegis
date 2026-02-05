@@ -83,7 +83,7 @@ func _drop_data(_at_position: Vector2, data):
 			tool.use_tool({})
 
 ## Get tooltip text
-func _make_tooltip(at_position: Vector2) -> String:
+func _make_tooltip(_at_position: Vector2) -> String:
 	var tooltip = "[b]" + tool_name + "[/b]\n"
 	tooltip += tool_description + "\n\n"
 	tooltip += "[i]Real-world: " + real_world_equivalent + "[/i]\n"
