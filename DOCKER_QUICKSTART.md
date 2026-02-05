@@ -25,10 +25,31 @@ Run the Python ML backend in Docker, Godot on your machine:
 docker-compose -f docker-compose.ml.yml up -d
 
 # Verify it's working
-curl http://localhost:5000/health
+curl http://localhost:5000/health  # Linux/macOS
+# On Windows PowerShell:
+Invoke-WebRequest http://localhost:5000/health
 # {"service":"neural-aegis-ml","status":"healthy"}
+```
 
-# Run Godot natively
+**Then run Godot:**
+
+**On Windows:**
+```powershell
+# Option A: If you have Godot in your PATH
+godot --path .
+
+# Option B: Use the full path to Godot
+& "C:\Path\To\Godot\godot.exe" --path .
+
+# Example with Steam installation:
+& "C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --path .
+
+# Option C: Or just double-click the Godot exe, click Import, 
+#          select project.godot, then press F5
+```
+
+**On Linux/macOS:**
+```bash
 godot --path .
 # Or open in Godot editor and press F5
 ```
@@ -103,6 +124,32 @@ curl -X POST http://localhost:5000/linear_regression \
 ```
 
 ## Troubleshooting
+
+### "godot is not recognized" (Windows)
+
+**Problem:** Windows doesn't know where to find Godot.
+
+**Solutions:**
+
+1. **Use the full path to Godot:**
+   ```powershell
+   & "C:\Path\To\Godot\godot.exe" --path .
+   ```
+
+2. **Add Godot to your PATH:**
+   - Right-click "This PC" → Properties → Advanced System Settings
+   - Click "Environment Variables"
+   - Under "User variables", find "Path" and click "Edit"
+   - Click "New" and add the folder containing `godot.exe`
+   - Click OK, then restart PowerShell
+   - Now `godot --path .` should work
+
+3. **Use the Godot GUI:**
+   - Double-click the Godot executable
+   - Click "Import"
+   - Navigate to the project folder and select `project.godot`
+   - Click "Import & Edit"
+   - Press F5 to run
 
 ### "Cannot connect to Docker daemon"
 
