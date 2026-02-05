@@ -74,7 +74,7 @@ func setup_table():
 func _on_auto_scroll_toggled(enabled: bool):
 	auto_scroll = enabled
 
-func _on_row_selected(item: TreeItem, column: int, selected: bool):
+func _on_row_selected(item: TreeItem, _column: int, selected: bool):
 	if selected:
 		if not selected_rows.has(item):
 			selected_rows.append(item)

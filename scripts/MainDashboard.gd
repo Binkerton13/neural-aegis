@@ -91,10 +91,10 @@ func _on_threat_neutralized(threat_data: Dictionary):
 		if entity_id > 0:
 			visualization_panel.animate_threat_neutralized(entity_id)
 
-func _on_tool_used(tool_name: String, target_data: Dictionary):
+func _on_tool_used(tool_name: String, _target_data: Dictionary):
 	update_status("Tool used: " + tool_name)
 
-func _on_theme_changed(new_theme: String):
+func _on_theme_changed(_new_theme: String):
 	update_status("Theme changed to: " + ThemeManager.get_current_theme_name())
 	# Refresh log viewer to show new theme terms
 	if log_viewer:
