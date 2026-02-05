@@ -1,0 +1,53 @@
+{
+  "forest": {
+    "name": "Forest Critters",
+    "threat_actor": "fox",
+    "threat_actor_plural": "foxes",
+    "secondary_threat": "bear",
+    "secondary_threat_plural": "bears",
+    "resource": "squirrel egg",
+    "resource_plural": "squirrel eggs",
+    "location": "den",
+    "location_plural": "dens",
+    "defensive_action": "snare",
+    "honeypot": "fake depot",
+    "honeypot_bait": "rabbit berries",
+    "trace_action": "track",
+    "normal_entity": "squirrel",
+    "normal_entity_plural": "squirrels"
+  },
+  "cyber": {
+    "name": "Cyberpunk",
+    "threat_actor": "botnet",
+    "threat_actor_plural": "botnets",
+    "secondary_threat": "APT group",
+    "secondary_threat_plural": "APT groups",
+    "resource": "data packet",
+    "resource_plural": "data packets",
+    "location": "server",
+    "location_plural": "servers",
+    "defensive_action": "firewall rule",
+    "honeypot": "honeypot",
+    "honeypot_bait": "fake credentials",
+    "trace_action": "trace route",
+    "normal_entity": "user",
+    "normal_entity_plural": "users"
+  },
+  "fantasy": {
+    "name": "Wizards & Warriors",
+    "threat_actor": "goblin",
+    "threat_actor_plural": "goblins",
+    "secondary_threat": "orc",
+    "secondary_threat_plural": "orcs",
+    "resource": "mana crystal",
+    "resource_plural": "mana crystals",
+    "location": "stronghold",
+    "location_plural": "strongholds",
+    "defensive_action": "ward",
+    "honeypot": "decoy cache",
+    "honeypot_bait": "cursed gems",
+    "trace_action": "scrying",
+    "normal_entity": "wizard",
+    "normal_entity_plural": "wizards"
+  }
+}

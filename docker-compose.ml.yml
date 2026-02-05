@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # ML Service only - recommended for development
+  ml-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.ml-service
+    container_name: neural-aegis-ml
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5000/health')"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s

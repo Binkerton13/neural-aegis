@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Full application with Godot + ML Service
+  # Note: Requires export_presets.cfg and may need X11 forwarding
+  neural-aegis:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: neural-aegis
+    environment:
+      - DISPLAY=${DISPLAY:-:0}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./data:/app/data
+    network_mode: host
+    stdin_open: true
+    tty: true
+    
+  # ML Service only (recommended for development)
+  # Run this and use Godot natively on your machine
+  ml-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.ml-service
+    container_name: neural-aegis-ml
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    profiles:
+      - ml-only
+

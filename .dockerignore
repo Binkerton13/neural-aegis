@@ -1,0 +1,37 @@
+# Git
+.git/
+.gitignore
+
+# Documentation (exclude for ML-service image, include for full build)
+docs/
+*.md
+!README.md
+
+# IDE
+.vscode/
+.idea/
+
+# Godot editor files
+.import/
+.godot/
+*.translation
+
+# Python virtual environment (don't copy into container)
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+/tmp/
+
+# Build artifacts
+build/
+export.cfg
+
+# Note: export_presets.cfg is INCLUDED for full Docker builds (Godot needs it)
+# It's excluded only in .dockerignore.ml for ML-service builds
