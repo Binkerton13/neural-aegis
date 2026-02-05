@@ -128,7 +128,13 @@ docker build -t neural-aegis:latest .
    
    # If missing, it should be in the repository
    git status export_presets.cfg
+   
+   # IMPORTANT: Check if .dockerignore is excluding it
+   grep export_presets.cfg .dockerignore
+   # Should NOT find it (file should be included in Docker build)
    ```
+   
+   **Note:** The `.dockerignore` file should NOT exclude `export_presets.cfg` for full Docker builds. Only `.dockerignore.ml` (for ML-service builds) should exclude it.
 
 2. **Invalid export preset:**
    - Open the project in Godot editor

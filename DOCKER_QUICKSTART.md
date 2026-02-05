@@ -137,6 +137,23 @@ docker logs neural-aegis-ml
 docker run -it neural-aegis-ml:latest /bin/bash
 ```
 
+### "export_presets.cfg not found" during Docker build
+
+This means the file is being excluded from the Docker build context.
+
+```bash
+# Verify the file exists
+ls export_presets.cfg
+
+# Check if .dockerignore is excluding it (should NOT be excluded)
+grep export_presets.cfg .dockerignore
+
+# If found in .dockerignore, remove that line
+# The file is needed for full Docker builds
+```
+
+**Solution:** Ensure `export_presets.cfg` is NOT listed in `.dockerignore` (it should only be in `.dockerignore.ml` for ML-only builds).
+
 ## Files Explanation
 
 | File | Purpose |

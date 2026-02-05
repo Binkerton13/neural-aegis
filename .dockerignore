@@ -29,7 +29,9 @@ Thumbs.db
 # Temporary files
 /tmp/
 
-# Build artifacts (for ML-service Dockerfile)
+# Build artifacts
 build/
 export.cfg
-export_presets.cfg
+
+# Note: export_presets.cfg is INCLUDED for full Docker builds (Godot needs it)
+# It's excluded only in .dockerignore.ml for ML-service builds
