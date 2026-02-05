@@ -238,8 +238,8 @@ func process_log_event(entry: Dictionary):
 	
 	# Extract entity ID from message if not directly available
 	# Note: entity_id can be int, String, or missing depending on the log source
-	# Check for invalid/empty values: 0, empty strings, or null
-	if not entity_id or (typeof(entity_id) == TYPE_STRING and entity_id.is_empty()):
+	# Check for invalid/empty values: null, 0 (invalid ID), or empty strings
+	if entity_id == null or entity_id == 0 or (typeof(entity_id) == TYPE_STRING and entity_id.is_empty()):
 		var regex = RegEx.new()
 		regex.compile("#(\\d+)")
 		var result = regex.search(message)
