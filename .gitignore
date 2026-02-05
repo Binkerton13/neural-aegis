@@ -1,7 +1,7 @@
 # Godot-specific
 .import/
 export.cfg
-export_presets.cfg
+# export_presets.cfg - Keep this file for Docker builds
 .mono/
 data_*/
 *.translation
