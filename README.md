@@ -53,18 +53,42 @@ The `start.sh` script will:
 3. Start the ML service on port 5000
 4. Keep running until you press Ctrl+C
 
-### Option 2: Using Docker
+### Option 2: Using Docker (ML Service Only - Recommended)
 
-The Docker image includes both Godot and the Python ML service:
+Run the Python ML backend in Docker, Godot natively on your machine:
 
 ```bash
 # Clone the repository
 git clone https://github.com/Binkerton13/neural-aegis.git
 cd neural-aegis
 
-# Build and run
+# Start ML service in Docker
+docker-compose --profile ml-only up -d ml-service
+
+# Verify it's running
+curl http://localhost:5000/health
+
+# Open Godot and import this project, then press F5
+```
+
+**Why this approach?**
+- Simple setup, no X11 configuration needed
+- Native graphics performance in Godot
+- ML service runs consistently across all platforms
+
+### Option 2b: Full Docker (Linux Only)
+
+Run both Godot and ML service in Docker (requires X11 forwarding):
+
+```bash
+# Allow Docker to access X server
+xhost +local:docker
+
+# Build and run everything
 docker-compose up --build
 ```
+
+**Note:** This requires Linux with X11. See [docs/DOCKER.md](docs/DOCKER.md) for detailed Docker instructions and troubleshooting.
 
 ### Option 3: Godot Only (No ML)
 

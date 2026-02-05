@@ -5,10 +5,24 @@ WORKDIR /app
 # Copy project files
 COPY . .
 
+# Ensure export presets exist
+RUN if [ ! -f export_presets.cfg ]; then \
+        echo "Error: export_presets.cfg not found!"; \
+        echo "Please create export_presets.cfg before building Docker image."; \
+        exit 1; \
+    fi
+
 # Export the project for Linux
-RUN mkdir -p /app/build
-RUN godot --headless --export-release "Linux/X11" /app/build/neural-aegis.x86_64 || \
-    echo "Export may fail without export preset, but continuing..."
+RUN mkdir -p /app/build && \
+    godot --headless --export-release "Linux/X11" /app/build/neural-aegis.x86_64 && \
+    echo "Export completed successfully" && \
+    ls -lh /app/build/
+
+# Verify export succeeded
+RUN if [ ! -f /app/build/neural-aegis.x86_64 ]; then \
+        echo "Error: Export failed - executable not created"; \
+        exit 1; \
+    fi
 
 # Runtime stage
 FROM ubuntu:22.04
