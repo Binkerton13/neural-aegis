@@ -44,7 +44,7 @@ Open PowerShell and run:
 
 ```powershell
 # Navigate to where you want the project
-cd "E:\2D Programs\DockerFiles\NeuralAegis"
+cd C:\path\to\your\projects
 
 # Clone the repository
 git clone https://github.com/Binkerton13/neural-aegis.git
@@ -80,7 +80,7 @@ You should see: `{"service":"neural-aegis-ml","status":"healthy"}`
 
 ```powershell
 # Navigate to the project directory
-cd "E:\2D Programs\DockerFiles\NeuralAegis\neural-aegis"
+cd C:\path\to\neural-aegis
 
 # Run with full path to Godot
 & "C:\Path\To\Godot\Godot_v4.2-stable_win64.exe" --path .

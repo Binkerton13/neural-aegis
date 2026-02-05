@@ -68,10 +68,10 @@ open -a XQuartz
    **Option B - Command Line (Windows):**
    ```powershell
    # Use the full path to your Godot executable
-   & "C:\Path\To\Godot\godot.exe" --path "C:\Path\To\neural-aegis"
+   & "C:\Path\To\Godot\godot.exe" --path "C:\path\to\neural-aegis"
    
    # Example with Steam installation:
-   & "C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --path "E:\2D Programs\DockerFiles\NeuralAegis\neural-aegis"
+   & "C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --path "C:\path\to\neural-aegis"
    ```
 
    **Option C - Command Line (Linux/macOS):**
