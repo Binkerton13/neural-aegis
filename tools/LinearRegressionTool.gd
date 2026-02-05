@@ -71,7 +71,7 @@ func _on_ml_response(endpoint: String, result: Dictionary):
 		
 		var message = "Trend Analysis (sklearn): Pattern is " + trend
 		message += " (slope: %.2f, R²: %.2f)" % [slope, r_squared]
-		message += "\nNext predictions: " + str(predictions[0:3])
+		message += "\nNext predictions: " + str(predictions.slice(0, 3))
 		
 		GameState.add_score(10)
 		
