@@ -31,6 +31,8 @@ Neural Aegis is an innovative gamified training application designed for securit
 - **Python 3.8+** - For real ML capabilities
 - **Docker** (optional) - For containerized deployment
 
+**📘 Windows Users:** See our detailed [Windows Setup Guide](WINDOWS_SETUP.md) for step-by-step instructions!
+
 ### Option 1: Run with ML Service (Recommended)
 
 This enables **real machine learning** using scikit-learn:
@@ -63,12 +65,31 @@ git clone https://github.com/Binkerton13/neural-aegis.git
 cd neural-aegis
 
 # Start ML service in Docker
-docker-compose --profile ml-only up -d ml-service
+docker-compose -f docker-compose.ml.yml up -d
 
 # Verify it's running
-curl http://localhost:5000/health
+curl http://localhost:5000/health  # On Windows, use: Invoke-WebRequest http://localhost:5000/health
+```
 
-# Open Godot and import this project, then press F5
+**Then run Godot:**
+
+**On Windows:**
+```powershell
+# Option A: If Godot is in your PATH
+godot --path .
+
+# Option B: Use the full path to your Godot executable
+& "C:\Path\To\Godot\godot.exe" --path .
+
+# Option C: Open Godot Editor GUI and import the project, then press F5
+# Example with Steam installation:
+& "C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --path .
+```
+
+**On Linux/macOS:**
+```bash
+godot --path .
+# Or open Godot Editor and import the project, then press F5
 ```
 
 **Why this approach?**
@@ -94,11 +115,17 @@ docker-compose up --build
 
 Run without the Python backend (tools will show error messages):
 
-```bash
-# Download Godot from godotengine.org
-# Open Godot and import the project
-# Press F5 to run
-```
+1. Download Godot 4.2+ from [godotengine.org](https://godotengine.org/download)
+2. Extract/install Godot to a location of your choice
+3. **Windows**: Double-click the Godot executable or run from PowerShell:
+   ```powershell
+   & "C:\Path\To\Godot\godot.exe" --path "C:\Path\To\neural-aegis"
+   ```
+4. **Linux/macOS**: Run from terminal:
+   ```bash
+   godot --path /path/to/neural-aegis
+   ```
+5. Or simply open Godot Editor, click "Import", select `project.godot`, then press F5
 
 **Note:** Without the ML service, tools like Linear Regression and Isolation Forest will display "ML service not available" messages.
 
@@ -127,10 +154,27 @@ Neural Aegis uses **real scikit-learn models** via a Python REST API:
 
 If `start.sh` doesn't work for your system:
 
+**On Linux/macOS:**
 ```bash
 # Create virtual environment
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Start the service
+python ml_service.py
+```
+
+**On Windows (PowerShell):**
+```powershell
+# Create virtual environment
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+
+# If you get an execution policy error, run:
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 # Install dependencies
 pip install -r requirements.txt
@@ -158,6 +202,7 @@ The ML service will be available at `http://localhost:5000`.
 ## 📚 Documentation
 
 - [Quick Start Guide](docs/QUICKSTART.md) - Detailed setup instructions
+- [Windows Setup Guide](WINDOWS_SETUP.md) - Comprehensive Windows-specific guide
 - [Architecture](docs/ARCHITECTURE.md) - System design and component overview
 - [Contributing](docs/CONTRIBUTING.md) - How to contribute to the project
 - [Development Guide](docs/DEVELOPMENT.md) - Adding tools, themes, and features

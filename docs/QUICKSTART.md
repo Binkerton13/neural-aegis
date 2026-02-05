@@ -41,15 +41,47 @@ open -a XQuartz
 ## Running Natively
 
 ### Requirements
-- Godot 4.2 or higher
+- Godot 4.2 or higher - Download from [godotengine.org](https://godotengine.org/download)
 
 ### Steps
 
-1. Download Godot from [godotengine.org](https://godotengine.org/)
-2. Extract and run the Godot executable
-3. Click "Import" and select the `project.godot` file
-4. Click "Import & Edit"
-5. Press **F5** (or click the play button) to run
+1. **Download and install Godot:**
+   - Visit [godotengine.org/download](https://godotengine.org/download)
+   - Download Godot 4.2+ for your platform
+   - Extract the archive to a location you can access
+
+2. **Clone the project:**
+   ```bash
+   git clone https://github.com/Binkerton13/neural-aegis.git
+   cd neural-aegis
+   ```
+
+3. **Launch Godot:**
+
+   **Option A - Using Godot GUI (Easiest):**
+   - Double-click the Godot executable
+   - Click "Import"
+   - Navigate to the project folder and select `project.godot`
+   - Click "Import & Edit"
+   - Press **F5** (or click the play button) to run
+
+   **Option B - Command Line (Windows):**
+   ```powershell
+   # Use the full path to your Godot executable
+   & "C:\Path\To\Godot\godot.exe" --path "C:\Path\To\neural-aegis"
+   
+   # Example with Steam installation:
+   & "C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe" --path "E:\2D Programs\DockerFiles\NeuralAegis\neural-aegis"
+   ```
+
+   **Option C - Command Line (Linux/macOS):**
+   ```bash
+   # If Godot is in your PATH:
+   godot --path /path/to/neural-aegis
+   
+   # Or with full path:
+   /path/to/godot --path /path/to/neural-aegis
+   ```
 
 ## Development Mode
 
@@ -128,6 +160,17 @@ Sets automated traps for specific threat types. Reactive defense mechanism.
 **Q: Can I run this without Docker?**
 A: Yes! Just download Godot 4.2+ and open the project.
 
+**Q: "godot is not recognized" on Windows - what do I do?**
+A: This means Godot is not in your PATH. You have three options:
+   1. Use the full path: `& "C:\Path\To\godot.exe" --path .`
+   2. Add Godot to your PATH (see Windows Setup section)
+   3. Just double-click the Godot executable and import the project through the GUI
+
+**Q: Where is Godot installed if I got it from Steam?**
+A: Common Steam paths:
+   - `C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe`
+   - `C:\Program Files\Steam\steamapps\common\Godot Engine\godot.windows.opt.tools.64.exe`
+
 **Q: What if I don't have a GPU?**
 A: Godot works fine with CPU rendering. The game is not graphically intensive.
 
@@ -139,3 +182,49 @@ A: See [DEVELOPMENT.md](DEVELOPMENT.md#adding-a-new-tool) for a step-by-step gui
 
 **Q: Is multiplayer supported?**
 A: Not yet, but it's on the [roadmap](ROADMAP.md) for Phase 4.
+
+## Windows-Specific Setup
+
+### Finding Your Godot Installation
+
+If you're not sure where Godot is installed:
+
+1. **If installed via Steam:**
+   - Open Steam
+   - Right-click on Godot in your library
+   - Select "Properties" → "Local Files" → "Browse"
+   - This opens the installation folder
+   - The executable is usually named `godot.windows.opt.tools.64.exe`
+
+2. **If downloaded from godotengine.org:**
+   - It's wherever you extracted the .zip file
+   - Look for `Godot_v4.2-stable_win64.exe` or similar
+
+### Adding Godot to PATH (Windows)
+
+To use `godot` as a command without the full path:
+
+1. Press `Windows + X` and select "System"
+2. Click "Advanced system settings"
+3. Click "Environment Variables"
+4. Under "User variables", find and select "Path"
+5. Click "Edit"
+6. Click "New"
+7. Add the folder path containing `godot.exe` (not the exe itself)
+   - Example: `C:\Program Files (x86)\Steam\steamapps\common\Godot Engine`
+8. Click "OK" on all windows
+9. Restart PowerShell or Command Prompt
+10. Now `godot --path .` should work
+
+### PowerShell Script Execution Policy
+
+If you get an error about script execution when activating the Python virtual environment:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Then try activating again:
+```powershell
+.\venv\Scripts\Activate.ps1
+```
