@@ -25,7 +25,37 @@ Neural Aegis is an innovative gamified training application designed for securit
 
 ## 🚀 Quick Start
 
-### Using Docker (Recommended)
+### Prerequisites
+
+- **Godot 4.2+** - Download from [godotengine.org](https://godotengine.org/)
+- **Python 3.8+** - For real ML capabilities
+- **Docker** (optional) - For containerized deployment
+
+### Option 1: Run with ML Service (Recommended)
+
+This enables **real machine learning** using scikit-learn:
+
+```bash
+# Clone the repository
+git clone https://github.com/Binkerton13/neural-aegis.git
+cd neural-aegis
+
+# Setup Python environment and start ML service
+./start.sh
+
+# In a separate terminal or after the ML service starts:
+# Open Godot and import this project, then press F5
+```
+
+The `start.sh` script will:
+1. Create a Python virtual environment
+2. Install dependencies (numpy, pandas, scikit-learn, flask)
+3. Start the ML service on port 5000
+4. Keep running until you press Ctrl+C
+
+### Option 2: Using Docker
+
+The Docker image includes both Godot and the Python ML service:
 
 ```bash
 # Clone the repository
@@ -36,15 +66,56 @@ cd neural-aegis
 docker-compose up --build
 ```
 
-### Using Godot Natively
+### Option 3: Godot Only (No ML)
 
-#### Requirements
-- Godot 4.2 or higher
+Run without the Python backend (tools will show error messages):
 
-#### Steps
-1. Download Godot from [godotengine.org](https://godotengine.org/)
-2. Open Godot and import the project
-3. Press **F5** to run
+```bash
+# Download Godot from godotengine.org
+# Open Godot and import the project
+# Press F5 to run
+```
+
+**Note:** Without the ML service, tools like Linear Regression and Isolation Forest will display "ML service not available" messages.
+
+## 🧠 Machine Learning Integration
+
+Neural Aegis uses **real scikit-learn models** via a Python REST API:
+
+- **Linear Regression** - Actual sklearn LinearRegression for trend forecasting
+- **Isolation Forest** - Real sklearn IsolationForest for outlier detection
+- **Statistical Analysis** - Z-score based anomaly detection using numpy
+
+### ML Service Architecture
+
+```
+┌─────────────┐      HTTP API      ┌──────────────┐
+│   Godot     │  ◄──────────────►  │   Python     │
+│   (GDScript)│                     │   Flask      │
+│             │                     │   sklearn    │
+└─────────────┘                     └──────────────┘
+  ↓ Drag tool onto log               ↓ Real ML analysis
+  ↓ Send data to API                 ↓ Return results
+  ↓ Display results
+```
+
+### Manual ML Service Setup
+
+If `start.sh` doesn't work for your system:
+
+```bash
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Start the service
+python ml_service.py
+```
+
+The ML service will be available at `http://localhost:5000`.
 
 ## 🎯 How to Play
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/MainDashboard.gd" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/TableLogViewer.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://scenes/ToolPalette.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/VisualizationPanel.tscn" id="4"]
 
 [node name="MainDashboard" type="Control"]
 layout_mode = 3
@@ -84,6 +85,12 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="VSeparator2" type="VSeparator" parent="MainLayout/ContentArea"]
+layout_mode = 2
+
+[node name="VisualizationPanel" parent="MainLayout/ContentArea" instance=ExtResource("4")]
+layout_mode = 2
 
 [node name="BottomBar" type="PanelContainer" parent="MainLayout"]
 custom_minimum_size = Vector2(0, 40)

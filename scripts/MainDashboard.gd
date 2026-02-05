@@ -4,6 +4,7 @@ extends Control
 
 @onready var log_viewer = $MainLayout/ContentArea/LogViewer
 @onready var tool_palette = $MainLayout/ContentArea/ToolPalette
+@onready var visualization_panel = $MainLayout/ContentArea/VisualizationPanel
 @onready var score_label = $MainLayout/TopBar/TopBarLayout/StatsPanel/ScoreLabel
 @onready var threats_label = $MainLayout/TopBar/TopBarLayout/StatsPanel/ThreatsLabel
 @onready var resources_label = $MainLayout/TopBar/TopBarLayout/StatsPanel/ResourcesLabel
@@ -57,6 +58,10 @@ func connect_signals():
 func _on_log_entry_generated(entry: Dictionary):
 	if log_viewer:
 		log_viewer.add_log_entry(entry)
+	
+	# Update visualization panel with log events
+	if visualization_panel:
+		visualization_panel.process_log_event(entry)
 
 func _on_score_changed(new_score: int):
 	if score_label:
@@ -70,9 +75,21 @@ func _on_threat_detected(threat_data: Dictionary):
 	if threats_label:
 		threats_label.text = "Threats Detected: " + str(GameState.threats_detected)
 	update_status("Threat detected! Entity #" + str(threat_data.get("entity_id", "?")))
+	
+	# Highlight in visualization
+	if visualization_panel:
+		var entity_id = threat_data.get("entity_id", 0)
+		if entity_id > 0:
+			visualization_panel.mark_as_alert(entity_id)
 
 func _on_threat_neutralized(threat_data: Dictionary):
 	update_status("Threat neutralized! +10 score")
+	
+	# Animate neutralization in visualization
+	if visualization_panel:
+		var entity_id = threat_data.get("entity_id", 0)
+		if entity_id > 0:
+			visualization_panel.animate_threat_neutralized(entity_id)
 
 func _on_tool_used(tool_name: String, target_data: Dictionary):
 	update_status("Tool used: " + tool_name)

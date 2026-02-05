@@ -9,6 +9,19 @@ data_*/
 # Godot 4+ specific ignores
 .godot/
 
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
 # Docker
 .env
 
