@@ -2,9 +2,9 @@ extends Control
 ## Visualization panel showing an overhead view with interactive shapes
 ## Displays entities and their activities as simple geometric shapes
 
-@onready var viewport_container: SubViewportContainer = $SubViewportContainer
-@onready var viewport: SubViewport = $SubViewportContainer/SubViewport
-@onready var canvas: Control = $SubViewportContainer/SubViewport/Canvas
+@onready var viewport_container: SubViewportContainer = $VBoxContainer/SubViewportContainer
+@onready var viewport: SubViewport = $VBoxContainer/SubViewportContainer/SubViewport
+@onready var canvas: Control = $VBoxContainer/SubViewportContainer/SubViewport/Canvas
 
 # Entity shapes
 var entities: Dictionary = {}  # entity_id -> EntityShape
@@ -237,7 +237,7 @@ func process_log_event(entry: Dictionary):
 	var message = entry.get("message", "")
 	
 	# Extract entity ID from message if not directly available
-	if entity_id == 0 or entity_id == "":
+	if entity_id == 0 or (typeof(entity_id) == TYPE_STRING and entity_id == ""):
 		var regex = RegEx.new()
 		regex.compile("#(\\d+)")
 		var result = regex.search(message)
